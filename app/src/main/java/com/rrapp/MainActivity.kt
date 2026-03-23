@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.rrapp.network.ApiClient
-import com.rrapp.network.LicenseRequest
 import kotlinx.coroutines.*
 
 class MainActivity : Activity() {
@@ -22,7 +20,6 @@ class MainActivity : Activity() {
         val activateBtn = findViewById<Button>(R.id.activateBtn)
 
         activateBtn.setOnClickListener {
-
             val licenseKey = licenseInput.text.toString()
 
             if (licenseKey.isEmpty()) {
@@ -30,26 +27,22 @@ class MainActivity : Activity() {
                 return@setOnClickListener
             }
 
-            scope.launch {
-                try {
-                    val response = ApiClient.apiService.checkLicense(LicenseRequest(licenseKey))
+            // Start checking for overdue installments and simulate lock screen trigger
+            if (licenseKey == "valid_license") {
+                scope.launch {
+                    // Simulate overdue installments
+                    val overdueInstallments = true // Change this logic based on your requirements
 
-                    runOnUiThread {
-                        Toast.makeText(this@MainActivity, "License Activated", Toast.LENGTH_LONG).show()
-
-                        // start service and pass license
-                        val intent = Intent(this@MainActivity, PaymentMonitorService::class.java)
-                        intent.putExtra("licenseKey", licenseKey)
-                        startService(intent)
-                    }
-
-                } catch (e: Exception) {
-                    runOnUiThread {
-                        Toast.makeText(this@MainActivity, "License Invalid", Toast.LENGTH_LONG).show()
+                    if (overdueInstallments) {
+                        runOnUiThread {
+                            val intent = Intent(this@MainActivity, LockActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
                 }
+            } else {
+                Toast.makeText(this, "Invalid License Key", Toast.LENGTH_LONG).show()
             }
-
         }
     }
 }

@@ -1,95 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#111111"
-    android:padding="24dp">
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <!-- Logo / App Name -->
-    <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RR FINANCE"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
-
-    <!-- Lock icon -->
-    <ImageView
-        android:id="@+id/lockIcon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@android:drawable/ic_lock_lock"
-        android:tint="#FF4444"
-        android:layout_below="@id/appTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"/>
-
-    <!-- Title -->
-    <TextView
-        android:id="@+id/lockTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DEVICE LOCKED"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_below="@id/lockIcon"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
-
-    <!-- Message -->
-    <TextView
-        android:id="@+id/lockMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Your installment payment is overdue.\n\nPlease contact the seller or enter your unlock code."
-        android:textColor="#CCCCCC"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_below="@id/lockTitle"
-        android:layout_marginTop="20dp"/>
-
-    <!-- Secret code input -->
     <EditText
         android:id="@+id/codeInput"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:hint="Enter Secret Code"
-        android:inputType="numberPassword"
-        android:textSize="16sp"
-        android:padding="12dp"
-        android:background="@android:drawable/edit_text"
-        android:layout_below="@id/lockMessage"
-        android:layout_marginTop="40dp"/>
+        android:inputType="numberPassword" />
 
-    <!-- Unlock button -->
     <Button
         android:id="@+id/unlockBtn"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:text="UNLOCK DEVICE"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#E53935"
-        android:layout_below="@id/codeInput"
-        android:layout_marginTop="20dp"/>
-
-    <!-- Contact info -->
-    <TextView
-        android:id="@+id/contactInfo"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="For payment support call:\n018XXXXXXXX"
-        android:textColor="#AAAAAA"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
-
-</RelativeLayout>
+        android:text="Unlock" />
+</LinearLayout>
