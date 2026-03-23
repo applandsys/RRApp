@@ -77,7 +77,7 @@ class PaymentMonitorService : Service() {
                 }
             }
 
-            delay(60 * 60 * 1000) // 1 hour
+            delay(60 * 6 * 1000) // 1 hour
         }
     }
 }
