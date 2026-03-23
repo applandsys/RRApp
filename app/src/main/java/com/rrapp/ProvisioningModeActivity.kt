@@ -10,13 +10,14 @@ class ProvisioningModeActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val resultIntent = Intent()
-        resultIntent.putExtra(
-            DevicePolicyManager.EXTRA_PROVISIONING_MODE,
-            DevicePolicyManager.PROVISIONING_MODE_FULLY_MANAGED_DEVICE
-        )
+        val result = Intent().apply {
+            putExtra(
+                DevicePolicyManager.EXTRA_PROVISIONING_MODE,
+                DevicePolicyManager.PROVISIONING_MODE_FULLY_MANAGED_DEVICE
+            )
+        }
 
-        setResult(Activity.RESULT_OK, resultIntent)
+        setResult(Activity.RESULT_OK, result)
         finish()
     }
 }

@@ -18,19 +18,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 🔥 DEVICE OWNER CHECK (PLACE HERE)
-        val dpm = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        // ✅ SINGLE MDM INSTANCE
+        val mdm = MDMManager(this)
 
-        if (dpm.isDeviceOwnerApp(packageName)) {
-            Toast.makeText(this, "Device Owner Active", Toast.LENGTH_SHORT).show()
-
-            // 👉 You can start admin services here
+        if (mdm.isOwner()) {
+            Toast.makeText(this, "Device Owner ACTIVE", Toast.LENGTH_SHORT).show()
         }
 
         val licenseInput = findViewById<EditText>(R.id.licenseInput)
         val activateBtn = findViewById<Button>(R.id.activateBtn)
 
         activateBtn.setOnClickListener {
+
             val licenseKey = licenseInput.text.toString()
 
             if (licenseKey.isEmpty()) {
@@ -39,16 +38,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (licenseKey == "valid_license") {
+
                 scope.launch {
                     val overdueInstallments = true
 
                     if (overdueInstallments) {
                         runOnUiThread {
-                            val intent = Intent(this@MainActivity, LockActivity::class.java)
-                            startActivity(intent)
+                            startActivity(
+                                Intent(this@MainActivity, LockActivity::class.java)
+                            )
                         }
                     }
                 }
+
             } else {
                 Toast.makeText(this, "Invalid License Key", Toast.LENGTH_LONG).show()
             }
