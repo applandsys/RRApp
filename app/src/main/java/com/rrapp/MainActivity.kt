@@ -1,20 +1,31 @@
 package com.rrapp
 
-import android.app.Activity
+import android.app.admin.DevicePolicyManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // 🔥 DEVICE OWNER CHECK (PLACE HERE)
+        val dpm = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+
+        if (dpm.isDeviceOwnerApp(packageName)) {
+            Toast.makeText(this, "Device Owner Active", Toast.LENGTH_SHORT).show()
+
+            // 👉 You can start admin services here
+        }
 
         val licenseInput = findViewById<EditText>(R.id.licenseInput)
         val activateBtn = findViewById<Button>(R.id.activateBtn)
@@ -27,11 +38,9 @@ class MainActivity : Activity() {
                 return@setOnClickListener
             }
 
-            // Start checking for overdue installments and simulate lock screen trigger
             if (licenseKey == "valid_license") {
                 scope.launch {
-                    // Simulate overdue installments
-                    val overdueInstallments = true // Change this logic based on your requirements
+                    val overdueInstallments = true
 
                     if (overdueInstallments) {
                         runOnUiThread {
